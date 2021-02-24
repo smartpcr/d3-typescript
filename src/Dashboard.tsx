@@ -21,7 +21,7 @@ export class Dashboard extends React.Component<IDashboardProps, IDashboardState>
     public render() {
         return <div>
             <BubbleChart name="world" />
-            <Barchart data={this.state.barchartData} width={900} height={300} />
+            <Barchart data={this.state.barchartData} width={900} height={300} paddingBottom={20} paddingLeft={20} />
             <div>
                 <button onClick={this.refreshData}>Refresh</button>
             </div>
