@@ -11,18 +11,13 @@ export interface IBarchartProps {
 }
 
 export class Barchart extends React.Component<IBarchartProps> {
-    private sortOrder: boolean = false;
-
-    constructor(props: IBarchartProps) {
-        super(props);
-    }
 
     public componentDidMount() {
         this.drawBarchart();
     }
 
     public componentDidUpdate(nextProps: IBarchartProps) {
-        if (nextProps.data != this.props.data) {
+        if (nextProps.data !== this.props.data) {
             this.handleUpdate();
         }
     }

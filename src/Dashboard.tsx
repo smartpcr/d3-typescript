@@ -3,6 +3,7 @@ import { Barchart } from "./components/BarChart";
 import { BubbleChart } from "./components/BubbleChart";
 import { PieChart } from "./components/PieChart";
 import { ScatterPlot } from "./components/ScatterPlot";
+import { SeriesData, StackedBar } from "./components/StackedBar";
 
 export interface IDashboardProps {
 }
@@ -11,6 +12,7 @@ export interface IDashboardState {
     barchartData: number[];
     scatterPlotData: { x: number, y: number }[];
     pieChartData: { name: string; value: number }[];
+    seriesData: SeriesData[];
 }
 
 
@@ -32,6 +34,13 @@ export class Dashboard extends React.Component<IDashboardProps, IDashboardState>
                 { name: "three", value: 30 },
                 { name: "four", value: 40 },
                 { name: "file", value: 50 },
+            ],
+            seriesData: [
+                { apples: 5, oranges: 10, grapes: 22 },
+				{ apples: 4, oranges: 12, grapes: 28 },
+				{ apples: 2, oranges: 19, grapes: 32 },
+				{ apples: 7, oranges: 23, grapes: 35 },
+				{ apples: 23, oranges: 17, grapes: 43 }
             ]
         };
     }
@@ -41,7 +50,8 @@ export class Dashboard extends React.Component<IDashboardProps, IDashboardState>
             <BubbleChart name="world" />
             <Barchart data={this.state.barchartData} width={900} height={300} paddingBottom={20} paddingLeft={20} />
             <ScatterPlot data={this.state.scatterPlotData} width={900} height={300} padding={30} />
-            <PieChart data={this.state.pieChartData} width={400} height={400} padding={10}/>
+            <PieChart data={this.state.pieChartData} width={400} height={400} padding={10} />
+            <StackedBar data={this.state.seriesData} layout={{width: 400, height: 400, padding: 20}} />
             <div>
                 <button onClick={this.refreshData}>Refresh</button>
             </div>

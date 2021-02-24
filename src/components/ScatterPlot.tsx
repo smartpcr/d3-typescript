@@ -10,10 +10,7 @@ export interface IScatterPlotProps {
 }
 
 export class ScatterPlot extends React.Component<IScatterPlotProps> {
-    constructor(props: IScatterPlotProps) {
-        super(props);
-    }
-
+    
     public componentDidMount() {
         this.draw();
     }
