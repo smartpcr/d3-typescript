@@ -28,7 +28,9 @@ export class StackedBar extends React.Component<IStackedBarProps> {
     }
 
     private draw = (): void => {
-        const stack = d3.stack<SeriesData, string>().keys(Object.keys(this.props.data[0]));
+        const stack = d3.stack<SeriesData, string>()
+            .keys(Object.keys(this.props.data[0]))
+            .order(d3.stackOrderDescending);
 
         const series = stack(this.props.data);
         const xScale = d3.scaleBand<number>()
@@ -37,7 +39,7 @@ export class StackedBar extends React.Component<IStackedBarProps> {
             .paddingInner(0.05);
         const yScale = d3.scaleLinear<number>()
             .domain([0, this.getStackSumMax()])
-            .range([this.props.layout.padding, this.props.layout.height - this.props.layout.padding * 2]);
+            .range([this.props.layout.height - this.props.layout.padding * 2, this.props.layout.padding]);
         const colors = d3.scaleOrdinal<number, string>(d3.schemeCategory10);
 
         const svg = d3.select("#stacked-bar")
@@ -54,8 +56,8 @@ export class StackedBar extends React.Component<IStackedBarProps> {
             .enter()
             .append("rect")
             .attr("x", (d, i) => xScale(i) ?? 0)
-            .attr("y", d => d && d.data ? yScale(d[0]) : 0)
-            .attr("height", d => d&& d.data ? yScale(d[1]) - yScale(d[0]) : 0)
+            .attr("y", d => d && d.data ? yScale(d[1]) : 0)
+            .attr("height", d => d && d.data ? yScale(d[0]) - yScale(d[1]) : 0)
             .attr("width", xScale.bandwidth);
     }
 
